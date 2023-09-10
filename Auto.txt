@@ -1,0 +1,11 @@
+apache配置文件最后一行加入一下代码
+RemoteIPHeader x-forwarded-for
+RemoteIPInternalProxy 127.0.0.1
+------------------------------------------------------------------------------
+cd /www/wwwroot
+rm -rf WebUS/
+git clone https://18540031876:gg202614..+@gitee.com/sanhayes/WebUS.git
+chmod -R 777 /www/wwwroot/WebUS
+cd /www/wwwroot/WebUS
+ls
+ 

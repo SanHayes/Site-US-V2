@@ -1,0 +1,64 @@
+{include file="head" /}
+
+{include file="menu" /}
+
+
+
+   <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+
+              <div class=" state-overview">
+                  <form class="form-search" method="post" id="formid">
+                    <div class="input-prepend">
+                        <button type="button" class="btn">账号</button>
+                        <input type="text" value="" placeholder="请输入账号" name="username" class="form-control">
+                    </div>
+
+                    <div class="input-prepend">
+                      <button type="button" class="btn">是否显示</button>
+                      <select name="isshow"  class="span1">
+                        <option selected="selected" value="1">显示</option>
+                        <option value="0">隐藏</option>
+                      </select>
+                    </div>
+                    <div class="input-prepend">
+                        <button type="button" class="btn">操作金额</button>
+                        <input type="text"  value=""  class="form-control" name="bpprice" placeholder="正数为加款，负数为扣款"/>
+                    </div>
+                    <div class="input-prepend">
+                        <button type="button" class="btn">备注</button>
+                        <input type="text"  value=""  class="form-control" name="remark" placeholder="请输入备注"/>
+                    </div>
+                    <input type="submit" onclick="return editcon(this.form)" class="btn btn-success" value="提交">
+                </form>
+              </div>
+              <!-- page end-->
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+
+{include file="foot" /}
+<script>
+  function editcon(form){
+    
+    var username = form.username.value;
+    var bpprice = form.bpprice.value;
+    var isshow = form.isshow.value;
+ 
+    if(!username){layer.msg('请输入用户名'); return false;}
+    if(!bpprice){layer.msg('请输入充值金额'); return false;}
+    
+      var formurl = "{:Url('user/addprice')}";
+      var data = $('#formid').serialize();
+      var locurl1 = "{:Url('user/userprice')}", locurl2 = "{:Url('user/cash')}";
+      locurl = bpprice>0 ? locurl1 : locurl2;
+
+      WPpost(formurl,data,locurl);
+
+      return false;
+  }
+</script>
+

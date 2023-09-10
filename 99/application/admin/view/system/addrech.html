@@ -1,0 +1,136 @@
+{include file="head" /}
+
+
+
+<!-- 编辑器引入结束 -->
+
+{include file="menu" /}
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+
+
+          <div class="row">
+                  <div class="col-sm-12">
+                      <aside class="profile-info col-lg-9">
+                      <section class="panel">
+
+                          <div class="panel-body bio-graph-info">
+                              <h1> 添加充值配置</h1>
+                              <form class="form-horizontal" role="form" method="post" id="formid" enctype="multipart/form-data">
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">名称</label>
+                                      <div class="controls">
+                                          <input type="text" class="span6" name="pay_name"  value="{$pay_name?$pay_name:''}"  >
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">编码</label>
+                                      <div class="controls">
+                                          <input type="text" class="span6" name="pay_conf"  value="{$pay_conf?$pay_conf:''}"  />
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">配置</label>
+                                      <div class="controls">
+                                          <textarea name="account_no"  class="span6" rows="10">{$account_no?$account_no:''}</textarea>
+                                          <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">
+                                             <strong>格式：</strong> key1:value1,key2:value2  ...
+                                          </div>
+                                      </div>
+                                  </div>
+
+                                  <div class="form-group">
+                                      <label class="col-lg-2 control-label">状态</label>
+                                      <div class="controls">
+                                            <label class="radio inline">
+                                                <input type="radio" name="is_use" id="is_use1" value="1" {if $is_use == 1} checked {/if}> 开启
+                                            </label>
+                                            <label class="radio inline">
+                                                <input type="radio" name="is_use" id="is_use2" value="0" {if $is_use == 0} checked {/if}> 关闭
+                                            </label>
+                                      </div>
+                                  </div>
+
+                                  <!--<div class="form-group">-->
+                                  <!--    <label class="col-lg-2 control-label">每笔手续费</label>-->
+                                  <!--    <div class="controls">-->
+                                  <!--        <input type="text" class="form-control" name="pay_point"  value="{$pay_point?$pay_point:'0'}"  >-->
+                                  <!--        <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">-->
+                                  <!--           <strong>说明：</strong> 输入百分比，如：2%则输入2-->
+                                  <!--        </div>-->
+                                  <!--    </div>-->
+                                  <!--</div>-->
+
+								  <!--<div class="form-group">-->
+									 <!-- <label class="col-lg-3 control-label">二维码：</label>-->
+									 <!-- <div class="controls">										-->
+										<!--{if $thumb}-->
+										<!--<div class="upload-pre-item"><a href="{$thumb}" target="_block" title="点击查看大图"><img height="100" src="{$thumb}" alt=""></a></div>-->
+										<!--{/if}-->
+										<!--<input type="file" id="thumb" name="thumb"/>-->
+									 <!-- </div>-->
+								  <!--</div>-->
+
+                                  <!--<div class="form-group">-->
+                                  <!--    <label class="col-lg-2 control-label">排序</label>-->
+                                  <!--    <div class="controls">-->
+                                  <!--        <input type="text" class="form-control" name="pay_order"  value="{$pay_order?$pay_order:'0'}"  >-->
+                                  <!--        <div class="alert alert-block alert-danger fade in" style="margin:10px 0 0 0 ">-->
+                                  <!--           <strong>说明：</strong> 数字越大越靠前-->
+                                  <!--        </div>-->
+                                  <!--    </div>-->
+                                  <!--</div>-->
+
+                                  {if isset($id) && !empty($id)}
+                                    <input type="hidden" value="{$id}" name="id">
+                                  {/if}
+
+                                  <div class="form-group">
+                                    <label class="col-lg-2 control-label">操作</label>
+                                    <div class="controls">
+                                        <input type="submit" value="提交"  onclick="return editcon(this.form)" class="btn btn-success">
+                                          <a href="{:url('system/recharge')}" class="btn btn-danger">返回</a>
+                                    </div>
+                                </div>
+
+                              </form>
+                          </div>
+                      </section>
+
+                  </aside>
+                  </div>
+
+          </div>
+
+
+
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+
+{include file="foot" /}
+
+<script>
+  function editcon(form){
+
+    var pay_name = form.pay_name.value;
+    var pay_conf = form.pay_conf.value;
+    var is_use = form.is_use.value;
+    var pay_point = form.pay_point.value;
+
+    if(!pay_name){layer.msg('请输入名称'); return false;}
+    if(!pay_conf){layer.msg('请输入配置信息'); return false;}
+
+    return true;
+  }
+
+
+ 
+</script>

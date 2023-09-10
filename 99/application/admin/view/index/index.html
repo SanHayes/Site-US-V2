@@ -1,0 +1,254 @@
+
+{include file="head" /}
+
+{include file="menu" /}
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!--state overview start-->
+                <div class="state-overview">
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol red color_white">
+                                <h4>今日新增</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.tody_user}</h1>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol gray color_white">
+                                <h4>总用户</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.all_user}</h1>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol blue color_white">
+                                <h4>总余额</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.all_usermoney}</h1>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="state-overview">
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol red color_white">
+                                <h4>今日订单</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.tody_order}</h1>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol gray color_white">
+                                <h4>客户盈亏</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.tody_profit}</h1>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol blue color_white">
+                                <h4>今日流水</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.tody_fee}</h1>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="state-overview">
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol terques color_white">
+                                <h4>今日充值</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.tody_recharge}</h1>
+                                
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol red color_white">
+                                <h4>今日提现</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.tody_get}</h1>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <section class="panel">
+                            <div class="symbol gray color_white">
+                                <h4>当天手续费</h4>
+                            </div>
+                            <div class="value">
+                                <h1>{$data.tody_shouxu}</h1>
+                            </div>
+                        </section>
+                    </div>
+
+                </div>
+              <!--state overview end-->
+            
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          <table class="table table-striped table-advance table-hover">
+                            <thead class="ordertable">
+                              <tr>
+                                <th>
+                                    #ID
+                                </th>
+                                <th>
+                                    账号
+                                </th>
+                                <th>
+                                    名称
+                                </th>
+                                <th>
+                                    订单时间
+                                </th>
+                                <th>
+                                    产品信息
+                                </th>
+                                <th>
+                                    状态
+                                </th>
+                                <th>
+                                    方向
+                                </th>
+                                <th>
+                                    时间/点数
+                                </th>
+                                <th>
+                                    建仓点位
+                                </th>
+                                <th>
+                                    平仓点位
+                                </th>
+                                <th>
+                                    委托金额
+                                </th>
+                                <th>
+                                    无效委托
+                                </th>
+                                <th>
+                                    有效委托
+                                </th>             
+                                <th>
+                                    实际盈亏
+                                </th>
+                                <th>
+                                    买后余额
+                                </th>
+                                
+                                <th>
+                                    所属代理
+                                </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <!-- {volist name="order" id="vo"} -->
+                              <tr>
+                                  <td>{$vo.oid}</td>
+                                  <td>{$vo.username}</td>
+                                  <td>{$vo.nickname}</td>
+                                  <td>{$vo.buytime|date="Y-m-d H:i:s",###}</td>
+                                  <td>{$vo.ptitle}</td>
+                                  <td>{if $vo.ostaus==1}平仓{else/}建仓{/if}</td>
+                                  {if $vo.ostyle == 0}
+                                  <td class="color_red">买涨</td>
+                                  {elseif $vo.ostyle == 1/}
+                                  <td class="color_green">买跌</td>
+                                  {/if}
+                                  <td>{$vo.selltime-$vo.buytime}{if $vo.eid==1}点{else/}秒{/if}</td>
+                                  <td>{$vo.buyprice}</td>
+                                  <td>
+                                    {if $vo.ostaus == 1}
+                                      {if $vo["buyprice"] > $vo["sellprice"]}
+                                        <font color="#2fb44e" size="3">{$vo.sellprice}</font>
+                                      {else/}
+                                        <font color="#ed0000" size="3">{$vo.sellprice}</font>
+                                      {/if}
+                                    {else/}
+                                        -
+                                    {/if}
+                                  </td>
+
+                                  <td class="color_red">${$vo.fee}</td>
+                                  
+                                  {if time() < $vo.selltime}
+                                  <td class="color_red">$0</td>
+                                  {elseif $vo.ploss == 0/}
+                                  <td class="color_red">${$vo.fee}</td>
+                                  {else /}
+                                  <td class="color_red">$0</td>
+                                  {/if}
+
+                                  {if time() < $vo.selltime}
+                                  <td class="color_green">${$vo.fee}</td>
+                                  {elseif $vo.ploss != 0/}
+                                  <td class="color_green">${$vo.fee}</td>
+                                  {else /}
+                                  <td class="color_green">$0</td>
+                                  {/if}
+
+                                  <td {if $vo.ploss > 0} class="color_red" {else /} class="color_green" {/if}>${$vo.ploss}</td>
+                                  <td class="color_red">${$vo.commission}</td>
+                                  <td>{$vo.managername ?? '-'}</td>
+                              </tr>
+                              <!-- {/volist} -->
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
+              
+             
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+
+{include file="foot" /}
+<script>
+ //owl carousel
+
+      $(document).ready(function() {
+          $("#owl-demo").owlCarousel({
+              navigation : true,
+              slideSpeed : 300,
+              paginationSpeed : 400,
+              singleItem : true
+
+          });
+      });
+
+      //custom select box
+
+      $(function(){
+          $('select.styled').customSelect();
+      });
+
+      
+
+</script>

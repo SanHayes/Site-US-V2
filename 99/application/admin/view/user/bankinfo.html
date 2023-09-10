@@ -1,0 +1,81 @@
+{include file="head" /}
+
+{include file="menu" /}
+
+
+<!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
+              <!--state overview start-->
+				      <form class="form-search" action="{:url('user/bankinfo')}" method="get">
+                <div class="input-prepend">
+                  <button type="button" class="btn">账号</button>
+                  <input type="text"  value="{$getdata['username']?$getdata['username']:''}"  class="form-control" name="username" placeholder="uid/姓名/手机号/卡号"/>
+                </div>
+                <input type="submit" class="btn btn-success" value="搜索">
+              </form>
+             <div class="">
+                  <div class="col-lg-12">
+                      <section class="panel">
+                          <table class="table table-striped table-advance table-hover">
+                            <thead class="ordertable">
+                              <tr>
+                                <th>序号</th>
+                                <th>UID</th>
+                                <th>钱包地址</th>
+                                <!-- <th>二维码</th> -->
+                                <!--<th>手机号</th>-->
+                                {if $otype == 3}
+                                <th>操作</th>
+                                {/if}
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <!-- {volist name="bankinfo" id="vo"} -->
+                              <tr>
+                                  <td>{$vo.id}</td>
+                                  <td>{$vo.uid}</td>
+                                  <td>{$vo.address}</td>
+                                  <!-- <td><a href="{$vo.qrcode}" target="_blank"><img src="{$vo.qrcode}" width="35" height="35" /></a></td> -->
+                                  <!--<td>{$vo.phone}</td>-->
+								  {if $otype == 3}
+                                  <td>
+                                      <a href="javascript:;" onclick="delcard({$vo.id})"><button class="btn btn-danger btn-xs" >删除</button></a>
+                                  </td>
+								  {/if}
+                              </tr>
+							             <!-- {/volist} -->
+
+                              </tbody>
+                          </table>
+                      </section>
+                  </div>
+              </div>
+
+             {$bankinfo->render()}
+
+          </section>
+      </section>
+      <!--main content end-->
+  </section>
+
+{include file="foot" /}
+
+<script>
+function delcard(id) {
+  layer.open({
+  content: '你确定删除吗？不可恢复哦，请慎重操作！',
+  yes: function(index){
+    var formurl = "{:url('user/delbankinfo')}";
+    var data = 'id='+id;
+    $.post(formurl,data,function(resdata){
+      layer.msg(resdata.data);
+      if(resdata.type == 1){
+        history.go(0);
+      }
+    })
+  }
+  });
+}
+</script>
+
