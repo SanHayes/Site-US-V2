@@ -25,10 +25,41 @@ class Api extends Controller{
 		$this->klinedata = db('klinedata');
 	}
 	
-	public function test()
+	public function index()
 	{
-	    file_put_contents(APP_PATH . 'test.txt','123456');
+	    while(true){
+        	$t = time();
+        	if(cache('shell')){
+                echo 'END!!!';
+                break;
+            }
+            if($t % 3 == 0){
+                $this->getdate();
+                $this->order();
+                $this->allotorder();
+            }
+            if($t % 30 == 0){
+                $this->checkbal();
+            }
+            if($t % 60 == 0){
+                $this->interest();
+            }
+            sleep(1);
+        }
 	}
+	
+	public function apirun()
+    {
+        shell_exec('
+            cd ' . ROOT_PATH . '
+            php think data > ' . ROOT_PATH . 'data.log
+        ');
+    }
+    
+    public function apidie()
+    {
+        cache('shell', true);
+    }
 
 	public function getdate()
 	{		
