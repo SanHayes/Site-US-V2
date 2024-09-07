@@ -30,22 +30,22 @@ class Api extends Controller{
 	    while(true){
         	$t = time();
         	if(cache('shell')){
-                echo 'END!!!';
-                break;
-            }
-            if($t % 3 == 0){
-                $this->getdate();
-                $this->order();
-                $this->allotorder();
-            }
-            if($t % 30 == 0){
-                $this->checkbal();
-            }
-            if($t % 60 == 0){
-                $this->interest();
-            }
-            sleep(1);
-        }
+				echo 'END!!!';
+				break;
+			}
+			if($t % 10 == 0){
+				$this->order();
+				$this->allotorder();
+			}
+			if($t % 30 == 0){
+				$this->checkbal();
+				$this->getdate();
+			}
+			if($t % 60 == 0){
+				$this->interest();
+			}
+			sleep(1);
+		}
 	}
 	
 	public function apirun()
