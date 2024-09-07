@@ -25,7 +25,7 @@ class Api extends Controller{
 		$this->klinedata = db('klinedata');
 	}
 	
-	public function index()
+	public function apiindex()
 	{
 	    while(true){
         	$t = time();
