@@ -114,10 +114,15 @@ a, a:hover, a:focus {
     background: #f67a6e;
     color: #fff;
     text-transform: uppercase;
-    font-weight: 300;
-    font-family:  'CustomFont' !important;
-    box-shadow: 0 4px #e56b60;
-    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: '微软雅黑' !important;
+    /* box-shadow: 0 4px #f67a6e; */
+    border: unset;
+    text-align: center;
+    line-height: 20px;
+    height: 30px;
+    width: 100%;
+    border-radius: 5px;
 }
 
 .form-signin p {
